@@ -3,8 +3,9 @@ import { View, Text, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Pl
 import { getDatabase, ref, get, update, set } from "firebase/database";
 import * as ImagePicker from 'expo-image-picker';
 
-const EditListing = ({ route, navigation }) => {
-  const { listingId } = route.params; // Get the listingId from route params
+//
+const EditListing = ({ route, navigation }) => { 
+  const { listingId } = route.params; 
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
@@ -17,6 +18,7 @@ const EditListing = ({ route, navigation }) => {
   const [city, setCity] = useState("");
   const [images, setImages] = useState([]);
 
+  // Fetch the listing details from Firebase 
   useEffect(() => {
     const fetchListingDetails = async () => {
       const db = getDatabase();
@@ -40,7 +42,8 @@ const EditListing = ({ route, navigation }) => {
     fetchListingDetails();
   }, [listingId]);
 
-  const handleUpdate = async () => {
+// Update the listing in Firebase
+  const handleUpdate = async () => { 
     const db = getDatabase();
     const listingRef = ref(db, `listings/${listingId}`);
     await update(listingRef, {
@@ -57,6 +60,7 @@ const EditListing = ({ route, navigation }) => {
     navigation.goBack();
   };
 
+  // Delete the listing from Firebase
   const handleDelete = async () => {
     Alert.alert(
       "Confirm Deletion",
@@ -82,7 +86,7 @@ const EditListing = ({ route, navigation }) => {
   };
   
   
-
+  // Function to pick an image from the camera or gallery and add to the listing
   const pickImage = async () => {
     Alert.alert(
       "Add a photo",
@@ -140,7 +144,7 @@ const EditListing = ({ route, navigation }) => {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust keyboard behavior based on platform
     >
       <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
@@ -202,11 +206,11 @@ const EditListing = ({ route, navigation }) => {
             style={styles.input}
             value={deposit}
             keyboardType="numeric"
-            onChangeText={(text) => {
+            onChangeText={(text) => { 
               const cleanedText = text.replace(",-", "");
               setDeposit(cleanedText);
             }}
-            onBlur={() => {
+            onBlur={() => { // Add ,- to the end of the deposit amount if it's a valid number and not empty
               if (deposit && !isNaN(deposit) && deposit.trim() !== "") {
                 setDeposit(deposit + ",-");
               } else {
@@ -236,12 +240,13 @@ const EditListing = ({ route, navigation }) => {
           <TouchableOpacity onPress={pickImage} style={styles.button}>
             <Text style={styles.buttonText}>Add photos</Text>
           </TouchableOpacity>
+          // Display the images in a horizontal ScrollView with delete buttons on each image
           {images.length > 0 && (
             <ScrollView horizontal contentContainerStyle={styles.photosContainer}>
                             {images.map((image, index) => (
                 <View key={index} style={styles.imageContainer}>
                   <Image source={{ uri: image }} style={styles.image} />
-                  <TouchableOpacity onPress={() => deleteImage(index)} style={styles.deleteButton}>
+                  <TouchableOpacity onPress={() => deleteImage(index)} style={styles.deleteButton}> 
                     <Text style={styles.deleteButtonText}>X</Text>
                   </TouchableOpacity>
                 </View>

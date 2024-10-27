@@ -4,11 +4,12 @@ import { useFocusEffect } from '@react-navigation/native'
 import { getDatabase, ref, get } from "firebase/database";
 
 const ListingDetails = ({ route, navigation }) => {
-  const { listingId } = route.params; // Get the listingId from route params
+  const { listingId } = route.params; 
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fullScreenImage, setFullScreenImage] = useState(null);
 
+  // Fetch listing details from Firebase 
   useFocusEffect(
     React.useCallback(() => {
       const fetchListingDetails = async () => {
@@ -23,11 +24,11 @@ const ListingDetails = ({ route, navigation }) => {
 
       fetchListingDetails();
 
-      return () => setLoading(true); // Reset loading state when the screen loses focus
+      return () => setLoading(true); 
     }, [listingId])
   );
 
-  if (loading) {
+  if (loading) { // Show loading screen if data from Firebase is not loaded yet
     return (
       <View style={styles.loadingContainer}>
         <Text>Loading...</Text>
@@ -76,7 +77,7 @@ const ListingDetails = ({ route, navigation }) => {
           <Text style={styles.detailItem}>Deposit: {listing.deposit} </Text>
         </View>
       </ScrollView>
-      <Modal visible={fullScreenImage !== null} transparent={true}>
+      <Modal visible={fullScreenImage !== null} transparent={true}> // Modal to show full screen image
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={() => setFullScreenImage(null)} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>X</Text>

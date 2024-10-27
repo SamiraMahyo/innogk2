@@ -4,7 +4,7 @@ import { getDatabase, ref, push, set } from "firebase/database";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from 'expo-image-picker';
 
-// CreateListing component
+// CreateListing component 
 const CreateListing = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +27,7 @@ const CreateListing = ({ navigation }) => {
     }
   };
 
-  // Handle form submission
+  // Handle form submission anf save listing to Firebase Realtime Database
   const handleSubmit = async () => {
     if (title && description && size && price && address && zipcode && city) {
       const db = getDatabase();
@@ -53,7 +53,7 @@ const CreateListing = ({ navigation }) => {
     }
   };
 
-  // Pick image from camera or library
+  // Pick image to allow adding photos from camera or library
   const pickImage = async () => {
     Alert.alert(
       "Add a photo",
@@ -119,14 +119,14 @@ const CreateListing = ({ navigation }) => {
     </View>
   );
 
-  // Delete image from images array
+  // Delete image from images array 
   const deleteImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
 
 
   return (
-    // KeyboardAvoidingView is used to ensure the keyboard does not cover the input fields
+    // Input fields with KeyboardAvoidingView used to make sure the keyboard does not cover the input fields
     <KeyboardAvoidingView
       style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
@@ -179,16 +179,14 @@ const CreateListing = ({ navigation }) => {
             value={price}
             keyboardType="numeric"
             onChangeText={(text) => {
-              // Remove ",-" rom the input to avoid adding it multiple times
               const cleanedText = text.replace(",-", "");
               setPrice(cleanedText);
             }}
             onBlur={() => {
-              // Add ",-" only if there's a number in the field
               if (price && !isNaN(price) && price.trim() !== "") {
                 setPrice(price + ",-");
               } else {
-                setPrice(""); // Keep it empty if there's no  number
+                setPrice(""); 
             }
           }}  
           />
@@ -249,6 +247,7 @@ const CreateListing = ({ navigation }) => {
           </TouchableOpacity>
         </View>
           
+        //Modal to display full size image when user clicks on image
         <Modal visible={selectedImage !== null} transparent={true}>
           <View style={styles.modalContainer}> 
             <TouchableOpacity onPress={() => setSelectedImage(null)} style={styles.closeButton}>

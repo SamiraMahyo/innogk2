@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
+//home screen with two buttons to navigate to create listing and view listings
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>

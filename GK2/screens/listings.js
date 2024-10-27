@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from "react
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useNavigation } from '@react-navigation/native';
 
+// List all listings
 const Listings = () => {
   const [listings, setListings] = useState([]);
   const navigation = useNavigation();
@@ -46,7 +47,7 @@ const Listings = () => {
     </TouchableOpacity>
   );
  
-//Flere sider til listings i stedet for 1 lang liste
+//Create additional pages if there are more than 5 listings
 const [currentPage, setCurrentPage] = useState(1);
 const itemsPerPage = 5;
 
