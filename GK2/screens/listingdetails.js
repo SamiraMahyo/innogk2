@@ -40,7 +40,8 @@ const ListingDetails = ({ route, navigation }) => {
   const hasImages = listing.images && listing.images.length > 0;
 
   return (
-    <View style={styles.container}>
+    
+    <View style={styles.container}> 
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Text style={styles.backButtonText}>←</Text>
@@ -77,7 +78,8 @@ const ListingDetails = ({ route, navigation }) => {
           <Text style={styles.detailItem}>Deposit: {listing.deposit} </Text>
         </View>
       </ScrollView>
-      <Modal visible={fullScreenImage !== null} transparent={true}> // Modal to show full screen image
+      
+      <Modal visible={fullScreenImage !== null} transparent={true}> 
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={() => setFullScreenImage(null)} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>X</Text>
