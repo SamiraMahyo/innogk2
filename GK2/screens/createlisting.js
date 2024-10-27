@@ -247,7 +247,7 @@ const CreateListing = ({ navigation }) => {
           </TouchableOpacity>
         </View>
           
-        //Modal to display full size image when user clicks on image
+    
         <Modal visible={selectedImage !== null} transparent={true}>
           <View style={styles.modalContainer}> 
             <TouchableOpacity onPress={() => setSelectedImage(null)} style={styles.closeButton}>

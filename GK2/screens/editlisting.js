@@ -240,7 +240,6 @@ const EditListing = ({ route, navigation }) => {
           <TouchableOpacity onPress={pickImage} style={styles.button}>
             <Text style={styles.buttonText}>Add photos</Text>
           </TouchableOpacity>
-          // Display the images in a horizontal ScrollView with delete buttons on each image
           {images.length > 0 && (
             <ScrollView horizontal contentContainerStyle={styles.photosContainer}>
                             {images.map((image, index) => (
@@ -306,7 +305,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 110, // Ensure content starts below the header
+    paddingTop: 110, 
     backgroundColor: "#FFF",
   },
   input: {
@@ -368,7 +367,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   deleteListingButton: {
-    backgroundColor: "#FF3B30", // Red color for delete
+    backgroundColor: "#FF3B30", 
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
